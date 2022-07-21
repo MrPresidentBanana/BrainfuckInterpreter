@@ -2,6 +2,9 @@
 # * interpreter for brainfuck implemented in python (I know it's ridiculous, but it's just for fun)
 # * takes code from the command line for now, file system possibly later
 
+from enum import Enum
+from enum import auto
+
 
 tape_length: int = 30_000
 
@@ -11,7 +14,7 @@ pointer: int = 0 # position of the read-write-head on the tape
 
 program_counter = 0
 
-loop_stack = [] # stack to track which ]belongs to which [
+loop_stack = [] # stack to track which ] belongs to which [
 
 
 while program_counter < len(code):
@@ -59,8 +62,8 @@ while program_counter < len(code):
                 print(f"ERROR at instruction {program_counter+1}: value at current position can't be converted to char")
 
         case ",":
-            input = input()
-            tape[pointer] = ord(input[0]) # if input longer than 1 character, only take first character
+            given_input = input()
+            tape[pointer] = ord(given_input[0]) # if input longer than 1 character, only take first character
 
 
         # loops
